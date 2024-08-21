@@ -1,0 +1,53 @@
+@import '~bootstrap/scss/bootstrap';
+
+$primary-color: #3490dc;
+$secondary-color: #ffed4a;
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.form-floating > label {
+    left: auto;
+}
+
+.modal {
+    --bs-modal-width: 700px;
+}
+
+.container {
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    color: $primary-color;
+}
+
+table.dataTable td.dt-type-numeric {
+    text-align: left;
+}
+
+.visualizar{
+    display: block;
+}
+
+.noVisualizar{
+    display: none;
+}
+
+
+// button {
+//     background-color: $primary-color;
+//     color: white;
+//     border: none;
+//     padding: 10px 20px;
+//     cursor: pointer;
+
+//     &:hover {
+//         background-color: darken($primary-color, 10%);
+//     }
+// }
+
