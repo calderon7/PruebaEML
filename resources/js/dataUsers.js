@@ -49,7 +49,6 @@ $('#submitButton').on('click', function (event) {
     event.preventDefault(); // Evita el envío automático del formulario
 
     var isValid = true;
-    var $form = $(this).closest('form');
 
     // Función para validar campos individuales
     function validateField(selector, alertSelector, isEmail = false) {
@@ -80,7 +79,6 @@ $('#submitButton').on('click', function (event) {
     validateField('#city', '#alertInvalidCity');
     validateField('#email', '#alertInvalidEmail', true);
 
-    console.log(userStoreUrl);
     // Si el formulario es válido, envíalo
     if (isValid) {
         const data = {
@@ -98,38 +96,133 @@ $('#submitButton').on('click', function (event) {
         };
         console.log(data);
         $.ajax({
-            url: "/users", // Cambia esta URL a la ruta donde se maneja el POST
+            url: "/users",
             method: 'POST',
             data: data,
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Incluye el token CSRF
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
                 console.log('Success:', response);
                 if (response.success) {
-                    alert('Usuario creado con éxito');
+                    Swal.fire({
+                        title: "Listo",
+                        text: "Usuario creado con éxito",
+                        icon: "success"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
                 }
             },
             error: function (xhr) {
                 console.error('Error:', xhr.responseText);
-                alert('Hubo un error al crear el usuario.');
+                Swal.fire({
+                    title: "Error",
+                    text: "Hubo un error al crear el usuario",
+                    icon: "error"
+                });
             }
         });
     }
 });
 
-$('#btnEliminar').on('click', function (event) {
-    $.ajax({
-        url: '/item/' + id,
-        type: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        success: function (response) {
-            alert(response.message);
-        },
-        error: function (xhr) {
-            alert(xhr.responseJSON.message);
-        }
+
+$(document).ready(function () {
+    $('.btnEliminar').on('click', function (event) {
+        Swal.fire({
+            title: "Estás seguro?",
+            text: "¿Estás seguro de que quieres eliminar este registro?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.preventDefault();
+
+                var userId = $(this).data('id');
+                var row = $(this).closest('tr');
+
+                $.ajax({
+                    url: '/users/' + userId,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            row.remove();
+                            Swal.fire({
+                                title: "Listo",
+                                text: "Usuario eliminado con éxito",
+                                icon: "success"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: "Ocurrió un error al intentar eliminar el registro",
+                                icon: "error"
+                            });
+                        }
+                    },
+                    error: function (xhr) {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Ocurrió un error al intentar eliminar el registro",
+                            icon: "error"
+                        });
+                    }
+                });
+
+            }
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('.btnEditar').on('click', function (event) {
+        event.preventDefault();
+        var userId = $(this).data('id');
+        console.log(userId);
+
+        $.ajax({
+            url: `/users/${userId}`, // Cambia esta URL a tu endpoint de API
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                // Llenar los campos del formulario con los datos del usuario
+                $('#user_name').val(data.user_name);
+                $('#genere').val(data.genere_id);
+                $('#num_document').val(data.num_document);
+                $('#first_name').val(data.first_name);
+                $('#second_name').val(data.second_name);
+                $('#first_lastname').val(data.first_lastname);
+                $('#second_lastname').val(data.second_lastname);
+                $('#email').val(data.email);
+                $('#phone').val(data.phone);
+                $('#city').val(data.city);
+                $('#date_birth').val(data.date_birth);
+
+                // También puedes establecer el ID del usuario en un campo oculto si es necesario para la actualización
+                $('#user_id').val(data.id);
+            },
+            error: function () {
+                // Manejo de errores si la solicitud falla
+                Swal.fire({
+                    title: "Error",
+                    text: "Error al cargar los datos",
+                    icon: "error"
+                });
+            }
+        });
     });
 });

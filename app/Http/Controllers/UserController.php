@@ -57,5 +57,27 @@ class UserController extends Controller
          // Devolver una respuesta JSON
          return response()->json(['success' => true, 'user' => $user]);
      }
- 
+
+     public function destroy($id)
+    {
+        $item = User::find($id);
+
+        if ($item) {
+            $item->delete();
+            return response()->json(['success' => true, 'message' => 'Item deleted successfully.']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Item not found.'], 404);
+        }
+    }
+
+    public function show($id)
+    {
+        $user = DB::table('view_user')->where('id', $id)->first();
+        if ($user) {
+            return response()->json($user);
+        } else {
+            return response()->json(['error' => 'Usuario no encontrado.'], 404);
+        }
+    }
+
 }

@@ -203,8 +203,8 @@
                             <td>{{ $user->update_user }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button class="btn btn-warning" id="btnEditar" value="{{ $user->id }}">Editar</button>
-                                    <button class="btn btn-danger" id="btnEliminar" value="{{ $user->id }}">Eliminar</button>
+                                    <button class="btn btn-warning btnEditar" data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#addUser">Editar</button>
+                                    <button class="btn btn-danger btnEliminar" data-id="{{ $user->id }}">Eliminar</button>
                                 </div>
                             </td>
                         </tr>
@@ -214,6 +214,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.4/js/dataTables.js"></script>
