@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     
     protected $fillable = [
         'user_name',
         'email',
-        'number_document',
+        'num_document',
+        'phone',
         'first_name',
         'second_name',
         'first_lastname',
@@ -20,6 +22,7 @@ class User extends Model
         'genere',
         'date_birth',
         'city',
-        'update_user',
+        'created_user',
+        'status',
     ];
 }

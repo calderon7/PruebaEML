@@ -26,7 +26,8 @@ class UserController extends Controller
          $request->validate([
              'user_name' => 'required|string|max:30',
              'email' => 'required|email|max:60',
-             'num_document' => 'required|int|max:255',
+             'num_document' => 'required|string|max:18',
+             'phone' => 'required|string|max:18',
              'first_name' => 'required|string|max:255',
              'second_name' => 'nullable|string|max:255',
              'first_lastname' => 'required|string|max:255',
@@ -34,7 +35,6 @@ class UserController extends Controller
              'genere' => 'required|int|max:10',
              'date_birth' => 'required|date',
              'city' => 'required|string|max:255',
-             'update_user' => 'required|date',
          ]);
  
          // Crear un nuevo usuario
@@ -42,6 +42,7 @@ class UserController extends Controller
              'user_name' => $request->user_name,
              'email' => $request->email,
              'num_document' => $request->num_document,
+             'phone' => $request->phone,
              'first_name' => $request->first_name,
              'second_name' => $request->second_name,
              'first_lastname' => $request->first_lastname,
@@ -49,84 +50,12 @@ class UserController extends Controller
              'genere' => $request->genere,
              'date_birth' => $request->date_birth,
              'city' => $request->city,
-             'update_user' => Carbon::now(),
+             'created_user' => date("Y-m-d H:i:s"),
+             'status' => 1,
          ]);
  
          // Devolver una respuesta JSON
          return response()->json(['success' => true, 'user' => $user]);
      }
  
-    //  // Mostrar un usuario específico
-    //  public function show($id)
-    //  {
-    //      $user = User::find($id);
-    //      return response()->json($user); // Devuelve el usuario como JSON para AJAX
-    //  }
- 
-    //  // Crear un nuevo usuario
-    //  public function store(Request $request)
-    //  {
-    //      $validator = Validator::make($request->all(), [
-    //          'name' => 'required|string|max:255',
-    //          'email' => 'required|string|email|max:255|unique:users',
-    //          'password' => 'required|string|min:8',
-    //      ]);
- 
-    //      if ($validator->fails()) {
-    //          return response()->json(['errors' => $validator->errors()], 422);
-    //      }
- 
-    //      $user = User::create([
-    //          'name' => $request->name,
-    //          'email' => $request->email,
-    //          'password' => Hash::make($request->password),
-    //      ]);
- 
-    //      return response()->json($user); // Devuelve el usuario recién creado como JSON
-    //  }
- 
-    //  // Actualizar un usuario existente
-    //  public function update(Request $request, $id)
-    //  {
-    //      $validator = Validator::make($request->all(), [
-    //          'name' => 'required|string|max:255',
-    //          'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-    //          'password' => 'nullable|string|min:8',
-    //      ]);
- 
-    //      if ($validator->fails()) {
-    //          return response()->json(['errors' => $validator->errors()], 422);
-    //      }
- 
-    //      $user = User::find($id);
- 
-    //      if (!$user) {
-    //          return response()->json(['error' => 'User not found'], 404);
-    //      }
- 
-    //      $user->name = $request->name;
-    //      $user->email = $request->email;
- 
-    //      if ($request->password) {
-    //          $user->password = Hash::make($request->password);
-    //      }
- 
-    //      $user->save();
- 
-    //      return response()->json($user); // Devuelve el usuario actualizado como JSON
-    //  }
- 
-    //  // Eliminar un usuario
-    //  public function destroy($id)
-    //  {
-    //      $user = User::find($id);
- 
-    //      if (!$user) {
-    //          return response()->json(['error' => 'User not found'], 404);
-    //      }
- 
-    //      $user->delete();
- 
-    //      return response()->json(['success' => 'User deleted successfully']); // Devuelve un mensaje de éxito como JSON
-    //  }
 }

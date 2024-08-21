@@ -203,8 +203,8 @@
                             <td>{{ $user->update_user }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button class="btn btn-warning">Editar</button>
-                                    <button class="btn btn-danger">Eliminar</button>
+                                    <button class="btn btn-warning" id="btnEditar" value="{{ $user->id }}">Editar</button>
+                                    <button class="btn btn-danger" id="btnEliminar" value="{{ $user->id }}">Eliminar</button>
                                 </div>
                             </td>
                         </tr>
@@ -220,9 +220,7 @@
     <script src="https://cdn.datatables.net/2.1.4/js/dataTables.bootstrap5.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap5.js"></script>
-    <script>
-        var userStoreUrl = "{{ route('users.store') }}";
-    </script>
+    
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 

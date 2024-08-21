@@ -95,11 +95,10 @@ $('#submitButton').on('click', function (event) {
             phone: $('#phone').val(),
             city: $('#city').val(),
             date_birth: $('#date_birth').val(),
-            update_user: "2024-08-21 06:07:06"
         };
         console.log(data);
         $.ajax({
-            url: userStoreUrl, // Cambia esta URL a la ruta donde se maneja el POST
+            url: "/users", // Cambia esta URL a la ruta donde se maneja el POST
             method: 'POST',
             data: data,
             headers: {
@@ -113,182 +112,24 @@ $('#submitButton').on('click', function (event) {
             },
             error: function (xhr) {
                 console.error('Error:', xhr.responseText);
-                // Aquí puedes manejar el error, como mostrar mensajes de error
                 alert('Hubo un error al crear el usuario.');
             }
         });
     }
 });
 
-// function todosCamposLlenos(obj) {
-//     return Object.values(obj).every(value => value !== "");
-// }
-
-// $(document).ready(function () {
-//     $('#submitButton').on('click', function () {
-//         const data = {
-//             user_name: $('#user_name').val(),
-//             genere: $('#genere').val(),
-//             number_document: $('#number_document').val(),
-//             first_name: $('#first_name').val(),
-//             second_name: $('#second_name').val(),
-//             first_lastname: $('#first_lastname').val(),
-//             second_lastname: $('#second_lastname').val(),
-//             email: $('#email').val(),
-//             phone: $('#phone').val(),
-//             city: $('#city').val(),
-//             date_birth: $('#date_birth').val(),
-//         };
-
-//         console.log(data);
-//         // if (todosCamposLlenos(data)) {
-//         //     log('Todos los campos están llenos.');
-//         // } else {
-//         //     console.log('Algunos campos están vacíos o tienen valores predeterminados.');
-//         // }
-
-//         // postData('/articles', data);
-//     });
-// });
-
-// $(document).ready(function () {
-//     $('#submitButton').on('click', function (event) {
-
-//         event.preventDefault(); // Evitar el envío del formulario para validar manualmente
-
-//         // Limpiar los estados previos
-//         var form = $(this);
-//         var isValid = true;
-
-//         // Validación de campos
-//         form.find(':input[required]').each(function () {
-//             var input = $(this);
-//             if (input.val().trim() === '') {
-//                 input.addClass('is-invalid');
-//                 isValid = false;
-//             } else {
-//                 input.removeClass('is-invalid').addClass('is-valid');
-//             }
-//         });
-
-//         // Validación del Usuario
-//         const user = $('#user_name');
-//         const validateUser = $('#alertInvalidUser');
-
-//         if (user.val().trim() === '') {
-//             user.addClass('is-invalid');
-//             validateUser.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             user.removeClass('is-invalid').addClass('is-valid');
-//             validateUser.removeClass('visualizar');
-//         }
-
-//         // Validación del Genereo
-//         // const genere = $('#genere');
-//         // console.log(genere.val());
-//         // if (genere.val() === "") {
-//         //     genereValidate
-//         //     isValid = false;
-
-//         // } else {
-//         //     genere.removeClass('is-invalid').addClass('is-valid');
-//         // }
-
-//         // Validación del Numero Documento
-//         const number_document = $('#number_document');
-//         const validateDocument = $('#alertInvalidNumberDocument');
-
-//         if (number_document.val().trim() === '') {
-//             number_document.addClass('is-invalid');
-//             validateDocument.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             number_document.removeClass('is-invalid').addClass('is-valid');
-//             validateDocument.removeClass('visualizar');
-//         }
-
-//         // Validación del Primer Nombre
-//         const first_name = $('#first_name');
-//         const validateFirstNames = $('#alertInvalidFirstName');
-
-//         if (first_name.val().trim() === '') {
-//             first_name.addClass('is-invalid');
-//             validateFirstNames.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             first_name.removeClass('is-invalid').addClass('is-valid');
-//             validateFirstNames.removeClass('visualizar');
-//         }
-
-//         // Validación del Primer Apellido
-//         const first_lastname = $('#first_lastname');
-//         const validateFirstLast = $('#alertInvalidFirstLastName');
-
-//         if (first_lastname.val().trim() === '') {
-//             first_lastname.addClass('is-invalid');
-//             validateFirstLast.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             first_lastname.removeClass('is-invalid').addClass('is-valid');
-//             validateFirstLast.removeClass('visualizar');
-//         }
-
-//         // Validación del Segundo Apellido
-//         const second_lastname = $('#second_lastname');
-//         const validateSecondLast = $('#alertInvalidSecondLastName');
-
-//         if (second_lastname.val().trim() === '') {
-//             second_lastname.addClass('is-invalid');
-//             validateSecondLast.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             second_lastname.removeClass('is-invalid').addClass('is-valid');
-//             validateSecondLast.removeClass('visualizar');
-//         }
-
-//         // Validación del Numero Celular
-//         const phone = $('#phone');
-//         const validatePhone = $('#alertInvalidPhone');
-
-//         if (phone.val().trim() === '') {
-//             phone.addClass('is-invalid');
-//             validatePhone.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             phone.removeClass('is-invalid').addClass('is-valid');
-//             validatePhone.removeClass('visualizar');
-//         }
-
-//         // Validación del Ciudad
-//         const city = $('#city');
-//         const validateCity = $('#alertInvalidCity');
-
-//         if (city.val().trim() === '') {
-//             city.addClass('is-invalid');
-//             validateCity.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             city.removeClass('is-invalid').addClass('is-valid');
-//             validateCity.removeClass('visualizar');
-//         }
-
-//         // Validación del correo electrónico
-//         const email = $('#email');
-//         const validateEmail = $('#alertInvalidEmail');
-
-//         if (email.val().trim() === '' || !email[0].checkValidity()) {
-//             email.addClass('is-invalid');
-//             validateEmail.addClass('visualizar');
-//             isValid = false;
-//         } else {
-//             email.removeClass('is-invalid').addClass('is-valid');
-//             validateEmail.removeClass('visualizar');
-//         }
-
-//         // Si el formulario es válido, envíalo
-//         if (isValid) {
-//             form.off('submit').submit(); // Permitir el envío del formulario
-//         }
-//     });
-// });
+$('#btnEliminar').on('click', function (event) {
+    $.ajax({
+        url: '/item/' + id,
+        type: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        success: function (response) {
+            alert(response.message);
+        },
+        error: function (xhr) {
+            alert(xhr.responseJSON.message);
+        }
+    });
+});
