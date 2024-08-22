@@ -7,14 +7,15 @@ new DataTable('#example', {
             type: 'inline', // Expande la fila directamente debajo
             renderer: function (api, rowIdx, columns) {
                 var data = $.map(columns, function (col, i) {
-                    return col.hidden ? '<tr data-dt-row="' + col.rowIndex +
+                    return col.hidden ? 
+                        '<div class="col-md-4" data-dt-row="' + col.rowIndex +
                         '" data-dt-column="' + col.columnIndex + '">' +
-                        '<td>' + col.title + ':</td> ' +
-                        '<td>' + col.data + '</td>' +
-                        '</tr>' : '';
+                        '<div class="form-label"><strong>' + col.title + ':</strong></div> ' +
+                        '<div class="form-label">' + col.data + '</div>' +
+                        '</div>' : '';
                 }).join('');
-
-                return data ? $('<table/>').append(data) : false;
+                
+                return data ? $('<div class="row g-3 mb-1"/>').append(data) : false;
             }
         }
     },
@@ -156,57 +157,55 @@ $('#submitButton').on('click', function (event) {
 // Eliminar usuarios 
 $(document).ready(function () {
     $('.btnEliminar').on('click', function (event) {
+        var userId = $(this).data('id');
+
         Swal.fire({
             title: "Estás seguro?",
             text: "¿Estás seguro de que quieres eliminar este registro?",
             icon: "warning",
+            showDenyButton: true,
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Eliminar",
+            confirmButtonText: "Desactivar",
+            denyButtonText: "Eliminar"
         }).then((result) => {
-            if (result.isConfirmed) {
-                event.preventDefault();
 
-                var userId = $(this).data('id');
-                var row = $(this).closest('tr');
+            let method = result.isConfirmed ? 'PUT' : 'DELETE';
 
-                $.ajax({
-                    url: '/users/' + userId,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            row.remove();
-                            Swal.fire({
-                                title: "Listo",
-                                text: "Usuario eliminado con éxito",
-                                icon: "success"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Error",
-                                text: "Ocurrió un error al intentar eliminar el registro",
-                                icon: "error"
-                            });
-                        }
-                    },
-                    error: function (xhr) {
+            $.ajax({
+                url: '/users/' + userId,
+                type: method,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: "Listo",
+                            text: response.message,
+                            icon: "success"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
                         Swal.fire({
                             title: "Error",
-                            text: "Ocurrió un error al intentar eliminar el registro",
+                            text:  response.message,
                             icon: "error"
                         });
                     }
-                });
-
-            }
+                },
+                error: function (xhr) {
+                    Swal.fire({
+                        title: "Error",
+                        text: "Ocurrió un error al intentar eliminar el registro",
+                        icon: "error"
+                    });
+                }
+            });
         });
     });
 });
@@ -241,9 +240,9 @@ $(document).ready(function () {
                 $('#city').val(data.city);
                 $('#date_birth').val(data.date_birth);
                 $('#user_id').val(data.id);
-                
-                console.log(data.genere,$('#genere').val());
-                
+
+                console.log(data.genere, $('#genere').val());
+
             },
             error: function () {
                 // Manejo de errores si la solicitud falla

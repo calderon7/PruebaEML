@@ -11969,6 +11969,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f1f1f1;
 }
 
 .form-floating > label {
@@ -11998,4 +11999,10 @@ table.dataTable td.dt-type-numeric {
 
 .noVisualizar {
   display: none;
+}
+
+.tittle {
+  font-family: system-ui;
+  font-weight: bold;
+  font-size: 3em;
 }

@@ -64,7 +64,7 @@ class UserController extends Controller
 
         if ($item) {
             $item->delete();
-            return response()->json(['success' => true, 'message' => 'Item deleted successfully.']);
+            return response()->json(['success' => true, 'message' => 'Usuario eliminado con éxito']);
         } else {
             return response()->json(['success' => false, 'message' => 'Item not found.'], 404);
         }
@@ -114,6 +114,17 @@ class UserController extends Controller
         ]);
 
         return response()->json(['success' => true, 'message' => 'Usuario actualizado con éxito']);
+    }
+
+    public function desactive($id)
+    {
+        $user = User::findOrFail($id);
+
+        $user -> update([
+            'status' => 2,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Usuario desactivado con éxito']);
     }
 
 }
