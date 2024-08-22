@@ -1,66 +1,72 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <h1>Aplicación Web CRUD de Usuarios en Laravel</h1>
 </p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://jonmircha.com/img/blog/crud.png" width="400" alt="Laravel Logo"></a></p>
+Esta es una aplicación web desarrollada con Laravel que permite la gestión de usuarios a través de funcionalidades CRUD (Crear, Leer, Actualizar y Borrar). La aplicación es responsive y utiliza MySQL como base de datos relacional.
 
-## About Laravel
+## Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Listar usuarios:** La aplicación permite listar los usuarios almacenados en la base de datos en orden alfabético (A-Z). Cada usuario se muestra con su ID, nombres, apellidos, teléfono, fecha de registro y fecha de última modificación. Además, se incluyen botones para editar o eliminar cada usuario.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Creación de usuarios:** Se puede agregar nuevos usuarios proporcionando nombres, apellidos, teléfono y fecha de registro. La fecha de creación se registra automáticamente.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Edición de usuarios:** Los datos de un usuario existente pueden ser actualizados, excepto su ID y la fecha de registro. La fecha de última modificación se actualiza automáticamente al guardar los cambios.
 
-## Learning Laravel
+- **Eliminación de usuarios:** Los usuarios pueden ser eliminados de la base de datos mediante un solo clic.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Alertas:** La aplicación muestra alertas para notificar al usuario sobre la finalización exitosa de una acción o cualquier error ocurrido durante el proceso.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Vistas
+La aplicación cuenta con las siguientes vistas:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Listado de usuarios:** Muestra la lista de usuarios registrados con opciones para editar o eliminar.
 
-## Laravel Sponsors
+- **Formulario de creación de usuario:** Permite agregar un nuevo usuario a la base de datos (popUp).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **Formulario de edición de usuario:** Muestra los datos actuales del usuario seleccionado para su modificación (popUp).
 
-### Premium Partners
+## Tecnologías Utilizadas
+### Backend:
+- **Laravel:** Framework PHP utilizado para construir la lógica de backend, gestión de rutas, controladores, y acceso a la base de datos.
+- **MySQL:** Base de datos relacional utilizada para almacenar la información de los usuarios.
+- **PHP:** Lenguaje de programación utilizado por Laravel.
+### Frontend:
+- **Bootstrap 5.3.3**: Framework CSS utilizado para el diseño responsive de la interfaz de usuario.
+- **Blade**: Motor de plantillas de Laravel utilizado para crear las vistas.
+### Herramientas de Desarrollo:
+- **Laravel Mix**: Herramienta de compilación y agrupación de activos, configurada para compilar y minificar archivos CSS y JS.
+- **SASS**: Preprocesador CSS para escribir estilos de forma más eficiente.
+# Requisitos
+- PHP >= 8.0
+- Composer
+- Node.js y npm
+- MySQL
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Instalación
+  
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/calderon7/PruebaEML.git
+   cd PruebaEML
 
-## Contributing
+2. Instalar dependencias de PHP:
+    ```bash
+   composer install
+3. Instalar dependencias de Node.js:
+    ```bash
+   npm install
+4. Configurar el archivo .env con los detalles de tu base de datos MySQL.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Ejecutar las migraciones y seeders para configurar la base de datos:
+    ```bash
+   php artisan migrate --seed
+6. Compilar los activos con Laravel Mix:
+    ```bash
+   npm run dev
+7. Instalar dependencias de PHP:
+    ```bash
+   git clone https://github.com/calderon7/PruebaEML.git
+   cd PruebaEML
+8. Iniciar el servidor de desarrollo:
+    ```bash
+   php artisan serve
