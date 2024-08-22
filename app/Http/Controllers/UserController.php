@@ -14,7 +14,7 @@ class UserController extends Controller
      // Mostrar la lista de usuarios
      public function index()
      {
-        $users = DB::table('view_user')->get();
+        $users = DB::table('view_user')->orderBy('first_name','asc')->get();
         $generes = DB::table('genere')->get();
         
          return view('users.index', ['users' => $users, 'generes' => $generes]);
@@ -72,12 +72,48 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = DB::table('view_user')->where('id', $id)->first();
+        $user = DB::table('users')->where('id', $id)->first();
         if ($user) {
             return response()->json($user);
         } else {
             return response()->json(['error' => 'Usuario no encontrado.'], 404);
         }
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validar los datos
+        $request->validate([
+            'user_name' => 'required|string|max:30',
+            'email' => 'required|email|max:60',
+            'num_document' => 'required|string|max:18',
+            'phone' => 'required|string|max:18',
+            'first_name' => 'required|string|max:255',
+            'second_name' => 'nullable|string|max:255',
+            'first_lastname' => 'required|string|max:255',
+            'second_lastname' => 'required|string|max:255',
+            'genere' => 'required|int|max:10',
+            'date_birth' => 'required|date',
+            'city' => 'required|string|max:255',
+        ]);
+        
+        $user = User::findOrFail($id);
+
+        $user -> update([
+            'user_name' => $request->user_name,
+            'email' => $request->email,
+            'num_document' => $request->num_document,
+            'phone' => $request->phone,
+            'first_name' => $request->first_name,
+            'second_name' => $request->second_name,
+            'first_lastname' => $request->first_lastname,
+            'second_lastname' => $request->second_lastname,
+            'genere' => $request->genere,
+            'date_birth' => $request->date_birth,
+            'city' => $request->city,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Usuario actualizado con éxito']);
     }
 
 }

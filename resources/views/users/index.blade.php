@@ -21,16 +21,18 @@
                 data-bs-target="#addUser">Agregar</button>
         </div>
 
-        <div class="modal fade " id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <!-- Modal popUp formulario Agregar / Editar-->
+        <div class="modal fade " id="addUser" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-fullscreen-sm-down">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="addUserLabel">Agrega Nuevo Usaurio</h1>
+                        <h1 class="modal-title fs-5" id="userModalLabel">Agrega Nuevo Usaurio</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="articleForm" class="needs-validation" novalidate>
                             @csrf
+                            <input type="hidden" id="user_id">
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -164,7 +166,7 @@
             </div>
         </div>
 
-        {{-- <?php echo $users; ?> --}}
+        <!--Tabla con informacion de los ususario con Jquery y Datatables-->
         <div id="userList">
             <table id="example" class="table table-striped nowrap text-star" style="width:100%">
                 <thead>

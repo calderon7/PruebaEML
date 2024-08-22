@@ -20,7 +20,7 @@ return new class extends Migration
             us.first_lastname, us.second_lastname,g.genere, us.email, us.phone, s.status, 
             us.city, us.state, us.created_user, us.update_user, us.date_birth 
             FROM users us left join genere g on us.genere = g.id  
-            left join status s on us.status = s.id ");
+            left join status s on us.status = s.id order by us.first_name asc");
     }
 
     /**

@@ -1,3 +1,4 @@
+// Importar DataTables y DataTables Responsive para que estén disponibles en el ámbito global
 new DataTable('#example', {
     responsive: {
         details: {
@@ -28,23 +29,40 @@ new DataTable('#example', {
         responsivePriority: 2 // Ajusta la prioridad del resto de las columnas
     }
     ],
+    "order": [],
     language: {
-        url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json" // Idioma español
     }
 });
 
+// Validacion solo numeros input text contenido numerico
 $(document).ready(function () {
     $('.numericInput').on('input', function () {
         $(this).val($(this).val().replace(/[^0-9]/g, ''));
     });
 });
 
+
+
+// Token para peticiones AJAX
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
+// Agregar usuarios informacion popUp
+$(document).ready(function () {
+    // Cuando se hace clic en el botón de agregar
+    $('#addUserBtn').on('click', function () {
+        $('#userModalLabel').text('Agregar Nuevo Usuario');
+        $('#submitButton').text('Guardar');
+        $('#articleForm').trigger('reset'); // Limpiar el formulario
+        $('#user_id').val(''); // Vaciar el campo oculto de ID
+    });
+});
+
+// Validación de campos del formulario de creación de usuarios
 $('#submitButton').on('click', function (event) {
     event.preventDefault(); // Evita el envío automático del formulario
 
@@ -94,20 +112,26 @@ $('#submitButton').on('click', function (event) {
             city: $('#city').val(),
             date_birth: $('#date_birth').val(),
         };
+
+        let userId = $('#user_id').val();
+        let method = userId ? 'PUT' : 'POST';
+        let url = userId ? '/users/' + userId : '/users'
+
         console.log(data);
         $.ajax({
-            url: "/users",
-            method: 'POST',
+            url: url,
+            method: method,
             data: data,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
+                let message = userId ? "Usuario actualizado con éxito" : "Usuario creado con éxito";
                 console.log('Success:', response);
                 if (response.success) {
                     Swal.fire({
                         title: "Listo",
-                        text: "Usuario creado con éxito",
+                        text: message,
                         icon: "success"
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -117,6 +141,7 @@ $('#submitButton').on('click', function (event) {
                 }
             },
             error: function (xhr) {
+                let message = userId ? "Hubo un error al actulizar el usuario" : "Hubo un error al crear el usuario";
                 console.error('Error:', xhr.responseText);
                 Swal.fire({
                     title: "Error",
@@ -128,7 +153,7 @@ $('#submitButton').on('click', function (event) {
     }
 });
 
-
+// Eliminar usuarios 
 $(document).ready(function () {
     $('.btnEliminar').on('click', function (event) {
         Swal.fire({
@@ -186,10 +211,14 @@ $(document).ready(function () {
     });
 });
 
+// Consulta información de usuario para editar
 $(document).ready(function () {
     $('.btnEditar').on('click', function (event) {
         event.preventDefault();
         var userId = $(this).data('id');
+        $('#userModalLabel').text('Editar Usuario');
+        $('#submitButton').text('Actualizar');
+
         console.log(userId);
 
         $.ajax({
@@ -199,9 +228,9 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (data) {
-                // Llenar los campos del formulario con los datos del usuario
+                // Llenar los campos del formulario con los datos del usuario 
                 $('#user_name').val(data.user_name);
-                $('#genere').val(data.genere_id);
+                $('#genere').val(data.genere);
                 $('#num_document').val(data.num_document);
                 $('#first_name').val(data.first_name);
                 $('#second_name').val(data.second_name);
@@ -211,9 +240,10 @@ $(document).ready(function () {
                 $('#phone').val(data.phone);
                 $('#city').val(data.city);
                 $('#date_birth').val(data.date_birth);
-
-                // También puedes establecer el ID del usuario en un campo oculto si es necesario para la actualización
                 $('#user_id').val(data.id);
+                
+                console.log(data.genere,$('#genere').val());
+                
             },
             error: function () {
                 // Manejo de errores si la solicitud falla
