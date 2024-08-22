@@ -70,3 +70,24 @@ La aplicación cuenta con las siguientes vistas:
 8. Iniciar el servidor de desarrollo:
     ```bash
    php artisan serve
+
+## Iamgenes del aplicativo
+### Vista informacion de los Usuarios:
+<p align="center"> 
+<img src="/img_project/view_table_crud.png" alt="Laravel Logo">
+</p>
+
+### Formulario para crear nuevos usuarios:
+<p align="center"> 
+<img src="/img_project/add_table_crud.png" alt="Laravel Logo">
+</p>
+
+### Formulario para modificar usuarios:
+<p align="center"> 
+<img src="/img_project/edit_table_crud.png" alt="Laravel Logo">
+</p>
+
+### Alerta para desactivar o eliminar Usuarios:
+<p align="center"> 
+<img src="/img_project/Delete_desactive_data.png" alt="Laravel Logo">
+</p>
