@@ -3,7 +3,8 @@
 </p>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://jonmircha.com/img/blog/crud.png" width="400" alt="Laravel Logo"></a></p>
 Esta es una aplicación web desarrollada con Laravel que permite la gestión de usuarios a través de funcionalidades CRUD (Crear, Leer, Actualizar y Borrar). La aplicación es responsive y utiliza MySQL como base de datos relacional.
-
+## Funcionalidades
+<p align="center"><a href="http://appproject.jhonnatancalderon.net/users" target="_blank">Link Proyecto Uso</p>
 ## Funcionalidades
 
 - **Lista de contactos:** La aplicación permite listar los usuarios almacenados en la base de datos en orden alfabético (A-Z). Cada usuario se muestra con su ID, nombres, apellidos, teléfono, fecha de registro y fecha de última modificación. Además, se incluyen botones para editar o eliminar cada usuario.
