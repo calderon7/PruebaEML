@@ -6,13 +6,13 @@ Esta es una aplicación web desarrollada con Laravel que permite la gestión de 
 
 ## Funcionalidades
 
-- **Listar usuarios:** La aplicación permite listar los usuarios almacenados en la base de datos en orden alfabético (A-Z). Cada usuario se muestra con su ID, nombres, apellidos, teléfono, fecha de registro y fecha de última modificación. Además, se incluyen botones para editar o eliminar cada usuario.
+- **Lista de contactos:** La aplicación permite listar los usuarios almacenados en la base de datos en orden alfabético (A-Z). Cada usuario se muestra con su ID, nombres, apellidos, teléfono, fecha de registro y fecha de última modificación. Además, se incluyen botones para editar o eliminar cada usuario.
 
-- **Creación de usuarios:** Se puede agregar nuevos usuarios proporcionando nombres, apellidos, teléfono y fecha de registro. La fecha de creación se registra automáticamente.
+- **Creación de contactoss:** Se puede agregar nuevos usuarios proporcionando nombres, apellidos, teléfono y fecha de registro. La fecha de creación se registra automáticamente.
 
-- **Edición de usuarios:** Los datos de un usuario existente pueden ser actualizados, excepto su ID y la fecha de registro. La fecha de última modificación se actualiza automáticamente al guardar los cambios.
+- **Edición de contacto:** Los datos de un usuario existente pueden ser actualizados, excepto su ID y la fecha de registro. La fecha de última modificación se actualiza automáticamente al guardar los cambios.
 
-- **Eliminación de usuarios:** Los usuarios pueden ser eliminados de la base de datos mediante un solo clic.
+- **Eliminación de contactos:** Los usuarios pueden ser eliminados de la base de datos mediante un solo clic.
 
 - **Alertas:** La aplicación muestra alertas para notificar al usuario sobre la finalización exitosa de una acción o cualquier error ocurrido durante el proceso.
 
