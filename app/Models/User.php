@@ -11,18 +11,15 @@ class User extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'user_name',
         'email',
-        'num_document',
         'phone',
         'first_name',
         'second_name',
         'first_lastname',
         'second_lastname',
-        'genere',
-        'date_birth',
         'city',
         'created_user',
         'status',
+        'state',
     ];
 }

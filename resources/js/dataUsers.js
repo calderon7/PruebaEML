@@ -71,13 +71,20 @@ $('#submitButton').on('click', function (event) {
 
     // Función para validar campos individuales
     function validateField(selector, alertSelector, isEmail = false) {
-        console.log(selector, alertSelector, isEmail);
-
-        const $field = $(selector);
+        const $field = $(selector); // Definir $field primero
         const $alert = $(alertSelector);
+        
+        // Verifica si el selector existe
+        if ($field.length === 0) {
+            console.error(`Elemento no encontrado: ${selector}`);
+            return; // Salir de la función si el elemento no existe
+        }
+    
+        console.log($field.val().trim()); // Ahora es seguro acceder a val()
+    
         const isEmpty = $field.val().trim() === '';
         const isInvalidEmail = isEmail && !$field[0].checkValidity();
-
+    
         if (isEmpty || isInvalidEmail) {
             $field.addClass('is-invalid');
             $alert.addClass('visualizar');
@@ -89,9 +96,8 @@ $('#submitButton').on('click', function (event) {
     }
 
     // Validación de todos los campos
-    validateField('#user_name', '#alertInvalidUser');
-    validateField('#num_document', '#alertInvalidNumberDocument');
     validateField('#first_name', '#alertInvalidFirstName');
+    validateField('#second_name', '#alertInvalidSecondName');
     validateField('#first_lastname', '#alertInvalidFirstLastName');
     validateField('#second_lastname', '#alertInvalidSecondLastName');
     validateField('#phone', '#alertInvalidPhone');
@@ -101,9 +107,6 @@ $('#submitButton').on('click', function (event) {
     // Si el formulario es válido, envíalo
     if (isValid) {
         const data = {
-            user_name: $('#user_name').val(),
-            genere: $('#genere').val(),
-            num_document: $('#num_document').val(),
             first_name: $('#first_name').val(),
             second_name: $('#second_name').val(),
             first_lastname: $('#first_lastname').val(),
@@ -111,7 +114,6 @@ $('#submitButton').on('click', function (event) {
             email: $('#email').val(),
             phone: $('#phone').val(),
             city: $('#city').val(),
-            date_birth: $('#date_birth').val(),
         };
 
         let userId = $('#user_id').val();
@@ -228,9 +230,6 @@ $(document).ready(function () {
             },
             success: function (data) {
                 // Llenar los campos del formulario con los datos del usuario 
-                $('#user_name').val(data.user_name);
-                $('#genere').val(data.genere);
-                $('#num_document').val(data.num_document);
                 $('#first_name').val(data.first_name);
                 $('#second_name').val(data.second_name);
                 $('#first_lastname').val(data.first_lastname);
@@ -238,10 +237,7 @@ $(document).ready(function () {
                 $('#email').val(data.email);
                 $('#phone').val(data.phone);
                 $('#city').val(data.city);
-                $('#date_birth').val(data.date_birth);
                 $('#user_id').val(data.id);
-
-                console.log(data.genere, $('#genere').val());
 
             },
             error: function () {

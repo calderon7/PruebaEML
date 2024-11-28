@@ -15,13 +15,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('num_document')->unique();
-            $table->string('user_name', 30)->unique();
             $table->string('first_name', 30);
             $table->string('second_name', 30)->nullable();
             $table->string('first_lastname', 30);
             $table->string('second_lastname', 30);
-            $table->foreignId('genere')->constrained('genere')->onDelete('cascade');
             $table->string('email', 60)->unique();
             $table->string('phone', 12);
             $table->foreignId('status')->constrained('status')->onDelete('cascade');
@@ -29,7 +26,6 @@ return new class extends Migration
             $table->string('state');
             $table->dateTime('created_user');
             $table->timestamp('update_user');
-            $table->date('date_birth');
         });
     }
 

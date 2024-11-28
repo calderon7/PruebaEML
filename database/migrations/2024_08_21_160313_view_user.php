@@ -16,11 +16,10 @@ return new class extends Migration
     {
         DB::statement("
             CREATE VIEW view_user AS
-            SELECT us.id, us.num_document, us.user_name, us.first_name, us.second_name, 
-            us.first_lastname, us.second_lastname,g.genere, us.email, us.phone, s.status, 
-            us.city, us.state, us.created_user, us.update_user, us.date_birth 
-            FROM users us left join genere g on us.genere = g.id  
-            left join status s on us.status = s.id order by us.first_name asc");
+            SELECT us.id,us.first_name, us.second_name, 
+            us.first_lastname, us.second_lastname, us.email, us.phone, s.status, 
+            us.city, us.state, us.created_user, us.update_user
+            FROM users us left join status s on us.status = s.id order by us.first_name asc;");
     }
 
     /**

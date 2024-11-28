@@ -24,37 +24,29 @@ class UserController extends Controller
      {
          // Validar los datos
          $request->validate([
-             'user_name' => 'required|string|max:30',
              'email' => 'required|email|max:60',
-             'num_document' => 'required|string|max:18',
              'phone' => 'required|string|max:18',
              'first_name' => 'required|string|max:255',
              'second_name' => 'nullable|string|max:255',
              'first_lastname' => 'required|string|max:255',
              'second_lastname' => 'nullable|string|max:255',
-             'genere' => 'required|int|max:10',
-             'date_birth' => 'required|date',
              'city' => 'required|string|max:255',
          ]);
  
          // Crear un nuevo usuario
          $user = User::create([
-             'user_name' => $request->user_name,
              'email' => $request->email,
-             'num_document' => $request->num_document,
              'phone' => $request->phone,
              'first_name' => $request->first_name,
              'second_name' => $request->second_name,
              'first_lastname' => $request->first_lastname,
              'second_lastname' => $request->second_lastname,
-             'genere' => $request->genere,
-             'date_birth' => $request->date_birth,
              'city' => $request->city,
              'created_user' => date("Y-m-d H:i:s"),
              'status' => 1,
+             'state' => 'active',
          ]);
  
-         // Devolver una respuesta JSON
          return response()->json(['success' => true, 'user' => $user]);
      }
 
@@ -84,32 +76,24 @@ class UserController extends Controller
     {
         // Validar los datos
         $request->validate([
-            'user_name' => 'required|string|max:30',
             'email' => 'required|email|max:60',
-            'num_document' => 'required|string|max:18',
             'phone' => 'required|string|max:18',
             'first_name' => 'required|string|max:255',
             'second_name' => 'nullable|string|max:255',
             'first_lastname' => 'required|string|max:255',
             'second_lastname' => 'required|string|max:255',
-            'genere' => 'required|int|max:10',
-            'date_birth' => 'required|date',
             'city' => 'required|string|max:255',
         ]);
         
         $user = User::findOrFail($id);
 
         $user -> update([
-            'user_name' => $request->user_name,
             'email' => $request->email,
-            'num_document' => $request->num_document,
             'phone' => $request->phone,
             'first_name' => $request->first_name,
             'second_name' => $request->second_name,
             'first_lastname' => $request->first_lastname,
             'second_lastname' => $request->second_lastname,
-            'genere' => $request->genere,
-            'date_birth' => $request->date_birth,
             'city' => $request->city,
         ]);
 

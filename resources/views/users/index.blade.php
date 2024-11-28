@@ -16,7 +16,7 @@
     <div class="container">
         <div class="text-center">
             <strong>
-                <h1 class="tittle">Informacion Usuarios del sistema</h1>
+                <h1 class="tittle">Agenda de Contactos</h1>
             </strong>
         </div>
 
@@ -38,7 +38,7 @@
                             @csrf
                             <input type="hidden" id="user_id">
                             <div class="row g-3">
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <i class="fa-solid fa-user"></i>
@@ -50,8 +50,8 @@
                                         </div>
                                         <div id="alertInvalidUser" class="invalid-feedback">El campo Usuario es requerido.</div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                </div> --}}
+                                {{-- <div class="col-md-4">
                                     <div class="form-floating">
                                         <select class="form-select" id="genere"
                                             aria-label="Floating label select example" required>
@@ -62,8 +62,8 @@
                                         </select>
                                         <label for="genere">Genero</label>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                                </div> --}}
+                                {{-- <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <i class="fa-solid fa-id-card"></i>
@@ -75,8 +75,8 @@
                                         </div>
                                         <div id="alertInvalidNumberDocument" class="invalid-feedback">El campo Numero Documento es requerido.</div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
+                                </div> --}}
+                                <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="first_name"
                                             placeholder="Primer Nombre" required>
@@ -84,14 +84,15 @@
                                     </div>
                                     <div id="alertInvalidFirstName" class="invalid-feedback">El campo Primer Nombre es requerido.</div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="second_name"
                                             placeholder="second_name">
                                         <label for="second_name">Segundo Nombre</label>
                                     </div>
+                                    <div id="alertInvalidSecondName" class="invalid-feedback">El campo Primer Apellido es requerido.</div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="first_lastname"
                                             placeholder="first_lastname" required>
@@ -100,7 +101,7 @@
                                     <div id="alertInvalidFirstLastName" class="invalid-feedback">El campo Primer Apellido es requerido.</div>
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="second_lastname"
                                             placeholder="second_lastname" required>
@@ -147,7 +148,7 @@
                                     </div>
                                     <div id="alertInvalidCity" class="invalid-feedback">El campo Ciudad es requerido.</div>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <i class="fa-solid fa-cake-candles"></i>
@@ -158,7 +159,7 @@
                                             <label for="date_birth">Fecha de Nacimiento</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </form>
                     </div>
@@ -175,17 +176,13 @@
             <table id="example" class="table table-striped nowrap text-star" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Documento</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Celular</th>
                         <th>Email</th>
-                        <th>Nombre Usuario</th>
-                        <th>Genero</th>
                         <th>Estado</th>
                         <th>Ciudad</th>
                         <th>Despartamento</th>
-                        <th>Fecha Nacimiento</th>
                         <th>Fecha Creacion</th>
                         <th>Fecha Actualizacion</th>
                         <th></th>
@@ -194,17 +191,13 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr class="align-middle" data-id="{{ $user->id }}">
-                            <td>{{ $user->num_document }}</td>
                             <td>{{ $user->first_name . ' ' . $user->second_name }}</td>
                             <td>{{ $user->first_lastname . ' ' . $user->second_lastname }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->user_name }}</td>
-                            <td>{{ $user->genere }}</td>
                             <td>{{ $user->status }}</td>
                             <td>{{ $user->city }}</td>
                             <td>{{ $user->state }}</td>
-                            <td>{{ $user->date_birth }}</td>
                             <td>{{ $user->created_user }}</td>
                             <td>{{ $user->update_user }}</td>
                             <td>
