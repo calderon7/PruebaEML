@@ -7,14 +7,14 @@ new DataTable('#example', {
             type: 'inline', // Expande la fila directamente debajo
             renderer: function (api, rowIdx, columns) {
                 var data = $.map(columns, function (col, i) {
-                    return col.hidden ? 
+                    return col.hidden ?
                         '<div class="col-md-4" data-dt-row="' + col.rowIndex +
                         '" data-dt-column="' + col.columnIndex + '">' +
                         '<div class="form-label"><strong>' + col.title + ':</strong></div> ' +
                         '<div class="form-label">' + col.data + '</div>' +
                         '</div>' : '';
                 }).join('');
-                
+
                 return data ? $('<div class="row g-3 mb-1"/>').append(data) : false;
             }
         }
@@ -73,18 +73,18 @@ $('#submitButton').on('click', function (event) {
     function validateField(selector, alertSelector, isEmail = false) {
         const $field = $(selector); // Definir $field primero
         const $alert = $(alertSelector);
-        
+
         // Verifica si el selector existe
         if ($field.length === 0) {
             console.error(`Elemento no encontrado: ${selector}`);
             return; // Salir de la función si el elemento no existe
         }
-    
+
         console.log($field.val().trim()); // Ahora es seguro acceder a val()
-    
+
         const isEmpty = $field.val().trim() === '';
         const isInvalidEmail = isEmail && !$field[0].checkValidity();
-    
+
         if (isEmpty || isInvalidEmail) {
             $field.addClass('is-invalid');
             $alert.addClass('visualizar');
@@ -172,42 +172,44 @@ $(document).ready(function () {
             confirmButtonText: "Desactivar",
             denyButtonText: "Eliminar"
         }).then((result) => {
+            if (result.dismiss != 'cancel') {
+                let method = result.isConfirmed ? 'PUT' : 'DELETE';
+                let url = result.isConfirmed ? '/users/' + userId + '/desactive' : '/users/' + userId;
 
-            let method = result.isConfirmed ? 'PUT' : 'DELETE';
-
-            $.ajax({
-                url: '/users/' + userId,
-                type: method,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if (response.success) {
-                        Swal.fire({
-                            title: "Listo",
-                            text: response.message,
-                            icon: "success"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
-                    } else {
+                $.ajax({
+                    url: url,
+                    type: method,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Listo",
+                                text: response.message,
+                                icon: "success"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: response.message,
+                                icon: "error"
+                            });
+                        }
+                    },
+                    error: function (xhr) {
                         Swal.fire({
                             title: "Error",
-                            text:  response.message,
+                            text: "Ocurrió un error al intentar eliminar el registro",
                             icon: "error"
                         });
                     }
-                },
-                error: function (xhr) {
-                    Swal.fire({
-                        title: "Error",
-                        text: "Ocurrió un error al intentar eliminar el registro",
-                        icon: "error"
-                    });
-                }
-            });
+                });
+            }
         });
     });
 });
@@ -217,7 +219,7 @@ $(document).ready(function () {
     $('.btnEditar').on('click', function (event) {
         event.preventDefault();
         var userId = $(this).data('id');
-        $('#userModalLabel').text('Editar Usuario');
+        $('#userModalLabel').text('Editar Contacto');
         $('#submitButton').text('Actualizar');
 
         console.log(userId);

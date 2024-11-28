@@ -235,40 +235,43 @@ $(document).ready(function () {
       confirmButtonText: "Desactivar",
       denyButtonText: "Eliminar"
     }).then(function (result) {
-      var method = result.isConfirmed ? 'PUT' : 'DELETE';
-      $.ajax({
-        url: '/users/' + userId,
-        type: method,
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function success(response) {
-          if (response.success) {
-            Swal.fire({
-              title: "Listo",
-              text: response.message,
-              icon: "success"
-            }).then(function (result) {
-              if (result.isConfirmed) {
-                location.reload();
-              }
-            });
-          } else {
+      if (result.dismiss != 'cancel') {
+        var method = result.isConfirmed ? 'PUT' : 'DELETE';
+        var url = result.isConfirmed ? '/users/' + userId + '/desactive' : '/users/' + userId;
+        $.ajax({
+          url: url,
+          type: method,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function success(response) {
+            if (response.success) {
+              Swal.fire({
+                title: "Listo",
+                text: response.message,
+                icon: "success"
+              }).then(function (result) {
+                if (result.isConfirmed) {
+                  location.reload();
+                }
+              });
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: response.message,
+                icon: "error"
+              });
+            }
+          },
+          error: function error(xhr) {
             Swal.fire({
               title: "Error",
-              text: response.message,
+              text: "Ocurrió un error al intentar eliminar el registro",
               icon: "error"
             });
           }
-        },
-        error: function error(xhr) {
-          Swal.fire({
-            title: "Error",
-            text: "Ocurrió un error al intentar eliminar el registro",
-            icon: "error"
-          });
-        }
-      });
+        });
+      }
     });
   });
 });
@@ -278,7 +281,7 @@ $(document).ready(function () {
   $('.btnEditar').on('click', function (event) {
     event.preventDefault();
     var userId = $(this).data('id');
-    $('#userModalLabel').text('Editar Usuario');
+    $('#userModalLabel').text('Editar Contacto');
     $('#submitButton').text('Actualizar');
     console.log(userId);
     $.ajax({

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Usuarios</title>
+    <title>Agenda de Contactos</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css">
     <script src="https://kit.fontawesome.com/aa7129c6ee.js" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
             <div class="modal-dialog modal-xl modal-fullscreen-sm-down">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #f1f1f1;">
-                        <h1 class="modal-title fs-2 tittle" id="userModalLabel">Agrega Nuevo Usaurio</h1>
+                        <h1 class="modal-title fs-2 tittle" id="userModalLabel">Agrega Nuevo Contacto</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -164,7 +164,7 @@
                         </form>
                     </div>
                     <div class="modal-footer" style="background-color: #f1f1f1;">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="submitButton">Guardar</button>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                         <th>Email</th>
                         <th>Estado</th>
                         <th>Ciudad</th>
-                        <th>Despartamento</th>
+                        {{-- <th>Despartamento</th> --}}
                         <th>Fecha Creacion</th>
                         <th>Fecha Actualizacion</th>
                         <th></th>
@@ -197,7 +197,7 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->status }}</td>
                             <td>{{ $user->city }}</td>
-                            <td>{{ $user->state }}</td>
+                            {{-- <td>{{ $user->state }}</td> --}}
                             <td>{{ $user->created_user }}</td>
                             <td>{{ $user->update_user }}</td>
                             <td>
