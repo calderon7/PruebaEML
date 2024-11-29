@@ -1,48 +1,77 @@
-<p align="center">
-    <h1>Aplicación Web CRUD de Usuarios en Laravel</h1>
-</p>
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://jonmircha.com/img/blog/crud.png" width="400" alt="Laravel Logo"></a></p>
-Esta es una aplicación web desarrollada con Laravel que permite la gestión de usuarios a través de funcionalidades CRUD (Crear, Leer, Actualizar y Borrar). La aplicación es responsive y utiliza MySQL como base de datos relacional.
-## Funcionalidades
-<p align="center"><a href="http://appproject.jhonnatancalderon.net/users" target="_blank">Link Proyecto Uso</p>
-## Funcionalidades
+# Aplicación Web de Agenda de Contactos (Modelo MVC)
 
-- **Lista de contactos:** La aplicación permite listar los usuarios almacenados en la base de datos en orden alfabético (A-Z). Cada usuario se muestra con su ID, nombres, apellidos, teléfono, fecha de registro y fecha de última modificación. Además, se incluyen botones para editar o eliminar cada usuario.
+Esta es una aplicación web desarrollada utilizando el modelo **MVC (Modelo-Vista-Controlador)** que permite gestionar una **agenda de contactos** con funcionalidades básicas de **Crear, Leer, Actualizar y Eliminar (CRUD)**. La interfaz es **responsive** y está diseñada para ofrecer una experiencia amigable al usuario. Los datos se almacenan en una base de datos relacional.
+---
 
-- **Creación de contactoss:** Se puede agregar nuevos usuarios proporcionando nombres, apellidos, teléfono y fecha de registro. La fecha de creación se registra automáticamente.
+# **Demostración en Vivo**
 
-- **Edición de contacto:** Los datos de un usuario existente pueden ser actualizados, excepto su ID y la fecha de registro. La fecha de última modificación se actualiza automáticamente al guardar los cambios.
+Accede a la aplicación funcional a través del siguiente enlace:  
+👉 [Aplicación Funcional de Agenda de Contactos](http://appproject.jhonnatancalderon.net/users)
 
-- **Eliminación de contactos:** Los usuarios pueden ser eliminados de la base de datos mediante un solo clic.
+---
 
-- **Alertas:** La aplicación muestra alertas para notificar al usuario sobre la finalización exitosa de una acción o cualquier error ocurrido durante el proceso.
+## **Funcionalidades Principales**
 
-## Vistas
-La aplicación cuenta con las siguientes vistas:
+- **Registro de contactos:**  
+  Permite agregar nuevos contactos ingresando información como nombre, apellido, teléfono y dirección. Los datos se validan antes de ser almacenados en la base de datos.
 
-- **Listado de usuarios:** Muestra la lista de usuarios registrados con opciones para editar o eliminar.
+- **Búsqueda de contactos:**  
+  Incluye una barra de búsqueda dinámica para localizar contactos por nombre, apellido o número de teléfono.
 
-- **Formulario de creación de usuario:** Permite agregar un nuevo usuario a la base de datos (popUp).
+- **Listado de contactos:**  
+  Muestra todos los contactos almacenados en la base de datos ordenados alfabéticamente. Cada registro incluye opciones para **editar** o **eliminar**.
 
-- **Formulario de edición de usuario:** Muestra los datos actuales del usuario seleccionado para su modificación (popUp).
+- **Edición de contactos:**  
+  Facilita la modificación de los datos de un contacto seleccionado. Los cambios se guardan automáticamente y se reflejan en la base de datos.
 
-## Tecnologías Utilizadas
-### Backend:
-- **Laravel:** Framework PHP utilizado para construir la lógica de backend, gestión de rutas, controladores, y acceso a la base de datos.
-- **MySQL:** Base de datos relacional utilizada para almacenar la información de los usuarios.
-- **PHP:** Lenguaje de programación utilizado por Laravel.
-### Frontend:
-- **Bootstrap 5.3.3**: Framework CSS utilizado para el diseño responsive de la interfaz de usuario.
-- **Blade**: Motor de plantillas de Laravel utilizado para crear las vistas.
-### Herramientas de Desarrollo:
-- **Laravel Mix**: Herramienta de compilación y agrupación de activos, configurada para compilar y minificar archivos CSS y JS.
-- **SASS**: Preprocesador CSS para escribir estilos de forma más eficiente.
-# Requisitos
-- PHP >= 8.0
-- Composer
-- Node.js y npm
-- MySQL
+- **Eliminación de contactos:**  
+  Ofrece la opción de eliminar contactos de manera permanente. Incluye confirmaciones visuales para evitar eliminaciones accidentales.
 
+---
+
+## **Tecnologías Utilizadas**
+
+### **Backend**
+- **PHP:** Lenguaje principal para la lógica del servidor.
+- **Modelo MVC:** Estructura organizada para separar la lógica de negocios (Modelo), la presentación (Vista) y el control de la aplicación (Controlador).
+- **MySQL:** Base de datos utilizada para el almacenamiento de los contactos.
+
+### **Frontend**
+- **HTML5:** Estructura básica de la interfaz.
+- **CSS3 y SASS:** Estilos personalizados para crear una interfaz visualmente atractiva y responsive.
+- **JavaScript (ES6):** Añade interactividad y funciones dinámicas como validaciones en el cliente y búsqueda en tiempo real.
+- **Bootstrap 5.3.3:** Framework CSS para diseño responsive.
+
+---
+
+## **Vistas del Sistema**
+
+1. **Vista Principal (Listado de Contactos):**  
+   - Muestra una tabla con todos los contactos registrados.  
+   - Incluye botones de acción para **editar** y **eliminar** cada contacto.  
+   - Barra de búsqueda para filtrar contactos en tiempo real.  
+
+2. **Formulario de Registro de Contactos:**  
+   - Permite agregar un nuevo contacto.  
+   - Validaciones dinámicas tanto en el cliente (JavaScript) como en el servidor (PHP).  
+
+3. **Formulario de Edición de Contactos:**  
+   - Muestra los datos actuales del contacto seleccionado para su modificación.  
+   - Valida los cambios antes de actualizarlos en la base de datos.  
+
+4. **Alertas y Confirmaciones:**  
+   - Notificaciones visuales para confirmar acciones exitosas o advertir sobre errores.  
+   - Ventanas emergentes para confirmar la eliminación de contactos.  
+
+---
+
+## **Requisitos**
+
+- Servidor web con soporte PHP (XAMPP, WAMP, etc.).  
+- PHP >= 7.4.  
+- MySQL >= 5.7.  
+
+---
 ## Instalación
   
 1. Clonar el repositorio:
