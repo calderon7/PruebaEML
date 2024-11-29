@@ -1,7 +1,7 @@
 # Aplicación Web de Agenda de Contactos (Modelo MVC)
 
 Esta es una aplicación web desarrollada utilizando el modelo **MVC (Modelo-Vista-Controlador)** que permite gestionar una **agenda de contactos** con funcionalidades básicas de **Crear, Leer, Actualizar y Eliminar (CRUD)**. La interfaz es **responsive** y está diseñada para ofrecer una experiencia amigable al usuario. Los datos se almacenan en una base de datos relacional.
----
+
 
 # **Demostración en Vivo**
 
